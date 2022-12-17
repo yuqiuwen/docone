@@ -9,16 +9,17 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OUTOPIKÓ',
   tagline: 'Do what u wanna do and love who u wanna love',
-  url: 'https://docone.vercel.app',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
+  url: ' https://yuqiuwen.github.io',
+  baseUrl: '/docone/',
+  
+  // onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'qiuwen', // Usually your GitHub org/user name.
-  projectName: 'mydocs', // Usually your repo name.
+  projectName: 'docone', // Usually your repo name.
   plugins: [
     // 'docusaurus-plugin-sass',
     '@docusaurus/theme-live-codeblock',
