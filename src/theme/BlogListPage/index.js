@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import BlogPostItem from '@theme/BlogPostItems';
 import BlogListPaginator from "@theme/BlogListPaginator";
 import qs from 'qs';
 import classnames from 'classnames';
@@ -29,7 +28,7 @@ function BlogListPage(props) {
   const {
     siteConfig: { title: siteTitle },
     // 当前语言
-    i18n: { currentLocale },
+    // i18n: { currentLocale },
   } = useDocusaurusContext();
   const isBlogOnlyMode = metadata.permalink === "/";
   const isPaginated = metadata.totalPages > 1;
