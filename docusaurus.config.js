@@ -9,7 +9,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OUTOPIKÓ',
   tagline: 'Do what u wanna do and love who u wanna love',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://docone.vercel.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
