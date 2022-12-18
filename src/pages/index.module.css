@@ -4,11 +4,12 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 8rem 0;
   text-align: center;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
-  background: url('/img/snow.jpg') rgba(0,0,0,0.6) no-repeat center center;
+  background: url('/img/bgHome.jpg') rgba(0,0,0,0.4) no-repeat center center;
   background-blend-mode: multiply;
   /* filter: blur(2px); */
   background-size: cover;
@@ -17,6 +18,10 @@
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;
+    align-items: center;
+  }
+  .avatarStyle {
+    width: 180px;
   }
 }
 
@@ -32,17 +37,26 @@
 }
 
 .avatarStyle {
-  width: 260px;
-  box-shadow: 0 5px 20px 10px rgba(204,188,188,0.5);
+  max-width: 250px;
+  /* box-shadow: 0 5px 20px 10px rgba(204,188,188,0.5); */
   object-fit: cover;
   background-color:rgba(0,0,0,0.5);
+  border: 12px solid rgba(247, 245, 245, 0.9);
   border-radius: 50%;
-  transition: all 0.4s;
+  transition: all 0.8s;
   
 }
 .avatarStyle:hover {
   cursor: pointer;
-  /* box-shadow: 0 8px 8px 0 rgb(204, 188, 188);  */
+  border: 12px solid rgba(247, 245, 245, 1);
+  box-shadow: 0 5px 20px 20px rgba(204,188,188,0.5);
   transform:rotate(-360deg) scale(1.25);
   transition: transform 1s ease-in-out; 
+}
+.imgBox {
+  margin-bottom: 2rem;
+}
+.container {
+  /* margin-top: 0; */
+  /* height: 1000px; */
 }

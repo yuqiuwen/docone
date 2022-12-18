@@ -7,19 +7,22 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'OUTOPIKÓ',
+  title: 'DOCONE',
   tagline: 'Do what u wanna do and love who u wanna love',
   url: ' https://yuqiuwen.github.io',
   baseUrl: '/docone/',
   
   // onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/book-open.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'qiuwen', // Usually your GitHub org/user name.
   projectName: 'docone', // Usually your repo name.
+  deploymentBranch: 'gh-pages',
+  trailingSlash: false, // add a '/' to urls
+
   plugins: [
     // 'docusaurus-plugin-sass',
     '@docusaurus/theme-live-codeblock',
@@ -83,10 +86,10 @@ const config = {
       // }, 
       navbar: {
         hideOnScroll: true,
-        title: 'OUTOPIKÓ',
+        title: 'DOCONE',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: 'img/book-open.svg',
         },
         items: [
           // {

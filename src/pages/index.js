@@ -16,22 +16,12 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero', styles.heroBanner)}>
-      <div className="container">
-        <div>
-        <img
-        src={avatar}
-        className={styles.avatarStyle}
-        // style={{
-        //   width: 260,
-        //   borderRadius: '50%',
-        //   objectFit: 'cover',
-        //   backgroundColor:'rgba(0,0,0,0.5)',
-        //   boxShadow:'0 5px 20px 10px rgba(204,188,188,0.5)',
-        //   }} 
-          /> 
-        </div>
-      
+      <div className={styles.container}>
+        <div className={styles.imgBox}>
+        <img src={avatar} className={styles.avatarStyle} /> 
+    
         <h1 className="hero__title" style={{color: '#fff'}}>QiuWen</h1>
+        </div>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link

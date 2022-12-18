@@ -229,7 +229,8 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 }
 
 .navbar__title {
-  margin-left: 12px;
+  margin: 0 12px;
+  font-size: 18px;
   color: var(--ifm-color-primary);
 }
 
