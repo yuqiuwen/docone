@@ -18,7 +18,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'qiuwen', // Usually your GitHub org/user name.
+  organizationName: 'yuqiuwen', // Usually your GitHub org/user name.
   projectName: 'docone', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false, // add a '/' to urls
@@ -88,7 +88,7 @@ const config = {
         hideOnScroll: true,
         title: 'DOCONE',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'DocOne Logo',
           src: 'img/book-open.svg',
         },
         items: [
