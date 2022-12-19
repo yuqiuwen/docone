@@ -4,14 +4,13 @@
  */
 
 .heroBanner {
-  padding: 8rem 0;
+  padding: 4rem 0;
   text-align: center;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   position: relative;
-  overflow: hidden;
-  background: url('/img/bgHome.jpg') rgba(0,0,0,0.4) no-repeat center center;
+  /* overflow: hidden; */
+  background: url('/img/wallhaven-j563wm_1920x1080.png') rgba(0,0,0,0.5) no-repeat center center;
   background-blend-mode: multiply;
-  /* filter: blur(2px); */
   background-size: cover;
 }
 
@@ -41,14 +40,14 @@
   /* box-shadow: 0 5px 20px 10px rgba(204,188,188,0.5); */
   object-fit: cover;
   background-color:rgba(0,0,0,0.5);
-  border: 12px solid rgba(247, 245, 245, 0.9);
+  border: 10px solid rgba(252, 251, 251, 0.9);
   border-radius: 50%;
   transition: all 0.8s;
   
 }
 .avatarStyle:hover {
   cursor: pointer;
-  border: 12px solid rgba(247, 245, 245, 1);
+  border: 10px solid rgba(247, 245, 245, 1);
   box-shadow: 0 5px 20px 20px rgba(204,188,188,0.5);
   transform:rotate(-360deg) scale(1.25);
   transition: transform 1s ease-in-out; 

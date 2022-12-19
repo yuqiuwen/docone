@@ -1,7 +1,6 @@
 ---
 title: Python Notes
-author: Qiuwen
-author_url: https://github.com/Jeffail
+authors: Qiuwen
 
 description: A summary of what's going on and what's coming up
 keywords: [
@@ -12,12 +11,11 @@ keywords: [
     "stream processor",
     "ETL",
 ]
-tags: [ "python", "django", '数据库', '计算机网络' ]
-date: 2022-12-14 10:00
+tags: [ "Python", "Django", 'DataBase', 'Network' ]
+date: 2022-12-14 12:00
 ---
 
 ## Anconda环境
-
 
 
 > **jupyter后台运行：**
@@ -975,6 +973,8 @@ asgi：wsgi+异步+websocket
 > uWSGI：实现了uwsgi和WSGI两种协议的Web服务器（默认单进程单线程）
 >
 > asgi: 基于wsgi接口规范之上的异步服务器网关接口规范
+
+
 
 ```mermaid
 flowchart LR

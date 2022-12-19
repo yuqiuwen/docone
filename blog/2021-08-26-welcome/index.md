@@ -1,7 +1,7 @@
 ---
 slug: welcome
 title: Welcome
-authors: [qiuwen]
+authors: [Qiuwen]
 tags: [facebook, hello, docusaurus]
 ---
 

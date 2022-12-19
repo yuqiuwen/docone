@@ -9,18 +9,15 @@ import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import BlogListPaginator from "@theme/BlogListPaginator";
+import BlogPostItem from "@theme/BlogPostItem";
+import TagsListInline from '@theme/TagsListInline';
 import qs from 'qs';
 import classnames from 'classnames';
 
 
-
-
 import HeroMain from "./img/hero_main.svg";
-
 import Link from "@docusaurus/Link";
-
 import styles from './style.module.css';
-
 
 
 function BlogListPage(props) {
@@ -37,8 +34,6 @@ function BlogListPage(props) {
 
   // Get all post views
   // const views = useViews(items);
-
-
 
   const queryObj = props.location ? qs.parse(props.location.search, { ignoreQueryPrefix: true }) : {};
 
@@ -78,6 +73,9 @@ function BlogListPage(props) {
   filteredCap = itemsFiltered.length;
   itemsFiltered = itemsFiltered.slice(0, searchLimit).sort((a,b) => b.content.metadata.date.localeCompare(a.content.metadata.date));
 
+  
+
+
   return (
     <Layout
       title={title}
@@ -107,13 +105,11 @@ function BlogListPage(props) {
       </div> */}
 
       
-      <div className="container-wrapper">
-        <div className="container padding-vert--sm">
+      <div className={styles.cookbookItemsContainer}>
+        <div className="container container--narrow container--bleed margin-vert--lg padding-vert--sm">
           <div className="row">
-
             <div className="col col--12">
-              {/* <div className="content__divider"></div> */}
-              <div className="search">
+              <div className={styles.search}>
                 <input
                   className={classnames("shadow--lw", styles.cookbookSearch)}
                   type="text"
@@ -135,39 +131,29 @@ function BlogListPage(props) {
                     const year = dateObj.getFullYear();
                     let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
                     const day = ("0" + dateObj.getDate()).slice(-2);
-                    console.log(BlogPostContent.frontMatter)
+                    const authors = blogMetaData.authors.length >0 ? blogMetaData.authors[0].name + ' ○ ': ''
+  
                     return (
                       
                       <div
-                        // className="post__list-item"
                         className={styles.blogPostItem}
-                        key={blogMetaData.permalink}
+                        key={index}
                         metadata={blogMetaData}
-                        truncated={BlogPostContent.metadata.truncated}
+                        truncated={blogMetaData.truncated}
                       >
                      
                           <Link to={blogMetaData.permalink} style={{"fontSize":"24px"}}>
                             {frontMatter.title}
                           </Link>
-                          <div className="post__list-date" style={{'fontSize':'12px','paddingBottom':'12px'}}>
-                          <a>{blogMetaData.authors[0].name}</a> ○ {year}-{month}-{day}
+                          <div className="post__list-date">
+                          <span>{authors}  {year}-{month}-{day} </span>
                           </div>
                           <div className="post__list-content">
                             {blogMetaData.description}
                           </div>
-                          <div className="post__list-tags">
-                        
-                            {tags.length > 0 &&
-                              tags.slice(0, 5).map(({ label, permalink: tagPermalink }, index) => (
-                                <Link key={tagPermalink} className={`post__tags ${index < tags.length ? "margin-right--sm" : ""}`}
-                                  to={tagPermalink}
-                                  style={{ fontSize: "0.75em", fontWeight: 500, }}
-                                >
-                                  {label}
-                                </Link>
-                              )
-                              )}
-                          </div>
+                
+                          <TagsListInline tags={tags} />
+
                         </div>
                         
 
@@ -182,7 +168,7 @@ function BlogListPage(props) {
                   </div>}
                 {itemsFiltered.length == 0 &&
                   <div className="col">
-                    <p>Whoops, looks like your search hasn't got any results. If the cookbook you want doesn't exist please <a href="https://github.com/benthosdev/benthos/issues/new">ask for it</a>.</p>
+                    <p>Looks like your search hasn't got any results.</p>
                   </div>}
                   
                 {isPaginated && <BlogListPaginator metadata={metadata} />}

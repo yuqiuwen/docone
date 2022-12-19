@@ -1,6 +1,15 @@
+.search {
+  width: 70%;
+  display: flex;
+  margin: 20px auto;
+  justify-content: center;
+  align-items: center;
+}
 .cookbookSearch {
-    margin: 20px 0;
+    
     font-size: 12pt;
+    width: 100%;
+    
     border-radius: var(--ifm-global-radius);
     border: none;
     padding: 5px;
@@ -15,7 +24,7 @@
     color: var(--ifm-font-color-base);
     display: block;
     margin-bottom: var(--ifm-spacing-vertical);
-    padding: calc( var(--ifm-spacing-vertical) * 1.5 ) calc( var(--ifm-spacing-horizontal) * 2 );
+    padding: calc( var(--ifm-spacing-vertical)) calc( var(--ifm-spacing-horizontal) * 2 );
     transition: box-shadow var(--ifm-transition-fast), background-color var(--ifm-transition-fast);
 }
 .blogPostItem:hover {
@@ -24,6 +33,14 @@
     box-shadow: var(--ifm-global-shadow-md);
 }
 .cookbookItemsContainer {
-    --ifm-container-width: 800px;
-    --ifm-container-width-xl: 800px;
+    --ifm-container-width: 1100px;
+    --ifm-container-width-xl: 1100px;
   }
+
+
+@media only screen and (max-width: 996px) {
+  .search {
+    width: 100%;
+  }
+
+}

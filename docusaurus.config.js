@@ -2,8 +2,6 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const path = require('path');
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -23,6 +21,10 @@ const config = {
   deploymentBranch: 'gh-pages',
   trailingSlash: false, // add a '/' to urls
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   plugins: [
     // 'docusaurus-plugin-sass',
     '@docusaurus/theme-live-codeblock',
@@ -118,15 +120,15 @@ const config = {
       //   contextualSearch: true
       // },
       prism: {
-        // theme: lightCodeTheme,
-        // darkTheme: darkCodeTheme,
-
         theme: require('prism-react-renderer/themes/github'),
         darkTheme: require('prism-react-renderer/themes/okaidia'),
         defaultLanguage: 'javascript',
         colorMode: {
           respectPrefersColorScheme: true
         },
+      },
+      mermaid: {
+        // theme: {light: 'neutral', dark: 'forest'},
       },
     }),
 };

@@ -21,11 +21,12 @@ function HomepageHeader() {
         <img src={avatar} className={styles.avatarStyle} /> 
     
         <h1 className="hero__title" style={{color: '#fff'}}>QiuWen</h1>
-        </div>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
+        </div>
+        
         <div className={styles.buttons}>
           <Link
-            className="button button--primary button--secondary button--lg"
+            className="button button--primary  button--outline  button--lg"
             to="/blog">
             Enter
           </Link>
@@ -90,13 +91,15 @@ export default function Home() {
   
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
+      <header>
       <HomepageHeader />
+      </header>
      
       <main>
-        {/* <HomepageFeatures /> */}
-         {/* <BlogList/> */}
+      
+        
       </main>
     </Layout>
   );
