@@ -6,7 +6,7 @@ description: Learn how to use Benthos to create a vanity chat bot.
 
 Stream processing is stupid and boring, and so it's important to re-purpose tools like Benthos for fun things occasionally. This cookbook outlines how Benthos can be used to create a Discord bot for important tasks such as providing insults and bad jokes to your chat. If you're a member of the [Benthos Discord server][discord-link] then you're likely already familiar with Blob Bot which is the resulting product.
 
-import ReactPlayer from 'react-player/youtube';
+<!-- import ReactPlayer from 'react-player/youtube'; -->
 
 <div className='container margin-vert--lg'>
   <div className='row row--no-gutters'>

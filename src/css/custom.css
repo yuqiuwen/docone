@@ -5,7 +5,9 @@
  */
 
 /* You can override the default Infima variables here. */
+
 :root {
+  --ifm-font-family-base: Helvetica, Arial, sans-serif;
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
@@ -28,7 +30,7 @@
   /* --ifm-heading-color: #000000; */
   --ifm-hero-text-color: #ffffff;
   /* --ifm-blockquote-color: #ffffff; */
-  --ifm-blockquote-shadow: 0px 0px 10px rgb(158, 158, 155);
+  --ifm-blockquote-shadow: 0px 0px 5px rgb(158, 158, 155);
   --ifm-blockquote-border-left-width: 5px;
   --ifm-blockquote-border-color: #429488;
   --ifm-blockquote-padding-horizontal: 10px;
@@ -320,6 +322,13 @@ html[data-theme="dark"] .bloghome__intro > p {
   background: var(--card-background);
   border-radius: 20px;
 }
+.post__list-title {
+  color: var(--ifm-color-primary);
+  font-size: 1.1em;
+  text-decoration: none;
+  transition: 0.5s;
+  grid-area: title;
+}
 
 .post__list-item .post__list-title {
   color: inherit;
@@ -335,7 +344,15 @@ html[data-theme="dark"] .bloghome__intro > p {
 
 .post__list-content {
   grid-area: content;
+  font-size: 0.9em;
   padding-bottom: 0.8rem;
+  
+  /* max-height: 40px;
+  line-height: 38px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  -webkit-line-clamp: 1;  */
 }
 
 .post__list-tags {
@@ -571,6 +588,13 @@ pagination-nav__item:hover .pagination-nav__link {
   .bloghome__posts-list {
     row-gap: 36px;
     grid-template-columns: minmax(0, max-content);
+  }
+  .post__list-content {
+    max-height: 40px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    -webkit-line-clamp: 1; 
   }
 }
 

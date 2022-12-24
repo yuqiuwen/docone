@@ -46,15 +46,14 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          feedOptions: {
-            type: 'all',
-          },
+          feedOptions: { type: 'all', },
           showReadingTime: true,
           blogSidebarCount: 0,
           postsPerPage: 10,
@@ -94,29 +93,23 @@ const config = {
           src: 'img/book-open.svg',
         },
         items: [
-          // {
-          //   type: 'search',
-          //   position: 'right',
-          // },
           { to: '/Blog', label: 'Blog', position: 'left' },
           // { to: '/cookbooks', label: 'CookBooks', position: 'left' },
-          {
-            type: 'doc',
+          { 
+            to: 'cookbooks111',
+            type: 'doc', 
             docId: 'intro',
             position: 'left',
             label: 'CookBooks',
           },
-          {
-            href: 'https://github.com/yuqiuwen',
-            label: 'GitHub',
-            position: 'right',
-          },
+          { type: 'search',position: 'right',},
+          { href: 'https://github.com/yuqiuwen', label: 'GitHub', position: 'right',},
         ],
       },
       // algolia: {
-      //   appId: 'WBY9Z65YR4',
-      //   apiKey: 'a6c476911e6ecef76049a55d9798a51b',
-      //   indexName: 'benthos',
+      //   appId: '',
+      //   apiKey: '',
+      //   indexName: '',
       //   contextualSearch: true
       // },
       prism: {
@@ -129,6 +122,10 @@ const config = {
       },
       mermaid: {
         // theme: {light: 'neutral', dark: 'forest'},
+      },
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
       },
     }),
 };

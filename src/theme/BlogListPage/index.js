@@ -126,13 +126,15 @@ function BlogListPage(props) {
                     const { metadata: blogMetaData, frontMatter, } = BlogPostContent;
 
                     const { date, tags } = blogMetaData;
-                    const dateObj = new Date(date);
+                    const dateObj = new Date(date.replace('Z','')); // Z表示格林尼治时间
+                    
 
                     const year = dateObj.getFullYear();
                     let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
                     const day = ("0" + dateObj.getDate()).slice(-2);
                     const authors = blogMetaData.authors.length >0 ? blogMetaData.authors[0].name + ' ○ ': ''
-  
+                  
+
                     return (
                       
                       <div
@@ -142,7 +144,7 @@ function BlogListPage(props) {
                         truncated={blogMetaData.truncated}
                       >
                      
-                          <Link to={blogMetaData.permalink} style={{"fontSize":"24px"}}>
+                          <Link to={blogMetaData.permalink} className="post__list-title">
                             {frontMatter.title}
                           </Link>
                           <div className="post__list-date">
@@ -151,8 +153,8 @@ function BlogListPage(props) {
                           <div className="post__list-content">
                             {blogMetaData.description}
                           </div>
-                
-                          <TagsListInline tags={tags} />
+
+                          {tags.length >0 && <TagsListInline tags={tags} />}
 
                         </div>
                         
