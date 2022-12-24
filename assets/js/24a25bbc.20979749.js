@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[1530],{58793:e=>{e.exports=JSON.parse('{"permalink":"/docone/blog/tags/\u7b14\u8bb0","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
