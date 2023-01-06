@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "c291c6ba0b3b2384",
+    "type": "split",
+    "children": [
+      {
+        "id": "98d88d2eb95062db",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "268367745575f926",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2022-12-14-python-notes/python notes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4c806f3404d23e10",
+    "type": "split",
+    "children": [
+      {
+        "id": "3f9c148561cbe1f7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b504256b3b9849c3",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a4132e390e486fb8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "4d0072036fb19779",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 308.5
+  },
+  "right": {
+    "id": "d4ab7e1e086ddc9b",
+    "type": "split",
+    "children": [
+      {
+        "id": "d147cd15008259f8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "87d3df0d26b68c76",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "blog/2022-12-14-python-notes/python notes.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1fb57c828f734ddf",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "blog/2022-12-14-python-notes/python notes.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ea492fa8d75b1495",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "b7474a07bdbe16c5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "blog/2022-12-14-python-notes/python notes.md"
+              }
+            }
+          },
+          {
+            "id": "98bbbc750e6119ec",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "f684059488dfd083",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 398.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:Create new canvas": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "268367745575f926",
+  "lastOpenFiles": [
+    "blog/2020-07-28-考研生词.md",
+    "blog/2022-12-14-python-notes/python notes.md",
+    "blog/2022-11-06-设计模式.md",
+    "blog/2022-12-28-测试笔记/测试笔记.md",
+    "Pasted image 20221228122716.png",
+    "2022-12-14-leecode/LeetCode.assets/image-20210215154311516.png.md",
+    "blog/2022-12-24-leecode/LeetCode.md",
+    "blog/2022-12-24-leecode/LeetCode.assets/image-20210215154311516.png",
+    "blog/2020-09-25-考研英语——翻译.md",
+    "Pasted image 20221228115958.png"
+  ]
+}

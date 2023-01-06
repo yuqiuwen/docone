@@ -43,4 +43,4 @@ If you are using GitHub pages for hosting, this command is a convenient way to b
 # DocOne
 This is my personal platform for documents management
 
-It will be transfer to utc, if use the formatter of  `-` in the frontmatter of blog, eg: `2022-10-30`. Therefore, it prefers using `2022/10/30 14:30:59`
+

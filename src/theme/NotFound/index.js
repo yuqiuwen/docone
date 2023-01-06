@@ -8,7 +8,7 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import classnames from 'classnames';
-import notFoundSvg from './img/notFound.svg'
+import NotFoundSvg from '@site/static/img/page_not_found.svg'
 import styles from './styles.module.css';
 
 function NotFound() {
@@ -16,11 +16,12 @@ function NotFound() {
     <Layout title="Page Not Found">
       <div className="container margin-vert--xl">
         <div className="row">
-          <div className={classnames("col col--6 col--offset-3", styles.notFoundContainer)}>
-            {/* TODO */}
-            {/* <img src='./img/notFound.svg' className={classnames("margin-bottom--lg", styles.notFoundBlob)}/> */}
+          <div className={classnames(styles.notFoundContainer)}>
+           
             <h1 className="hero__title">Sorry! Page Not Found</h1>
-            <p>The documentation site has recently moved.</p>
+            <NotFoundSvg />
+            
+          
           </div>
         </div>
       </div>

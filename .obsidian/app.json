@@ -1,0 +1,20 @@
+{
+  "userIgnoreFilters": [
+    "static/",
+    "build/",
+    "node_modules/",
+    "src/"
+  ],
+  "attachmentFolderPath": "./assets",
+  "showFrontmatter": true,
+  "showLineNumber": false,
+  "spellcheck": true,
+  "spellcheckLanguages": [
+    "zh-CN",
+    "en"
+  ],
+  "newFileLocation": "folder",
+  "newFileFolderPath": "blog",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true
+}

@@ -6,7 +6,7 @@ const path = require('path');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DOCONE',
-  tagline: 'Do what u wanna do and love who u wanna love',
+  tagline: 'do what u wanna do and love who u wanna love',
   url: ' https://yuqiuwen.github.io',
   baseUrl: '/docone/',
   

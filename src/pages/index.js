@@ -7,9 +7,10 @@ import Layout from '@theme/Layout';
 
 import useGlobalData from '@docusaurus/useGlobalData';
 import styles from './index.module.css';
-import avatar from '@site/static/img/avatar1.jpg'
+import avatar from '@site/static/img/avatar.jpg'
 import TagsListInline from '@theme/TagsListInline';
 import './styles.css'
+
 
 
 function HomepageHeader() {
@@ -21,12 +22,12 @@ function HomepageHeader() {
         <img src={avatar} className={styles.avatarStyle} /> 
     
         <h1 className="hero__title" style={{color: '#fff'}}>QiuWen</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className={styles.subtitle}>{siteConfig.tagline}</p>
         </div>
         
         <div className={styles.buttons}>
           <Link
-            className="button button--info  button--lg"
+            className="button button--primary  button--lg"
             to="/blog">
             Enter
           </Link>
