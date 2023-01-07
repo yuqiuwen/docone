@@ -321,6 +321,7 @@ html[data-theme="dark"] .bloghome__intro > p {
   padding: 1em 1.2em;
   background: var(--card-background);
   border-radius: 20px;
+  
 }
 .post__list-title {
   color: var(--ifm-color-primary);
@@ -586,7 +587,7 @@ pagination-nav__item:hover .pagination-nav__link {
 /* post list view adjustment */
 @media only screen and (max-width: 700px) {
   .bloghome__posts-list {
-    row-gap: 36px;
+    row-gap: 10px;
     grid-template-columns: minmax(0, max-content);
   }
   .post__list-content {

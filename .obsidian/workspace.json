@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "88a2a5aafd188966",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2022-12-14-python-notes/python协程案例.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "blog/2022-12-14-python-notes/python notes.md",
+                "file": "blog/2022-12-14-python-notes/python协程案例.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "blog/2022-12-14-python-notes/python notes.md",
+                "file": "blog/2022-12-14-python-notes/python协程案例.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "blog/2022-12-14-python-notes/python notes.md"
+                "file": "blog/2022-12-14-python-notes/python协程案例.md"
               }
             }
           },
@@ -163,17 +176,17 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "268367745575f926",
+  "active": "88a2a5aafd188966",
   "lastOpenFiles": [
-    "blog/2020-07-28-考研生词.md",
     "blog/2022-12-14-python-notes/python notes.md",
+    "blog/2022-12-14-python-notes/python协程案例.md",
+    "blog/2022-10-30-paramiko&fabric.md",
     "blog/2022-11-06-设计模式.md",
+    "template/post-template.md",
+    "blog/2022-12-24-leecode/LeetCode.md",
+    "blog/2020-07-28-考研生词.md",
     "blog/2022-12-28-测试笔记/测试笔记.md",
     "Pasted image 20221228122716.png",
-    "2022-12-14-leecode/LeetCode.assets/image-20210215154311516.png.md",
-    "blog/2022-12-24-leecode/LeetCode.md",
-    "blog/2022-12-24-leecode/LeetCode.assets/image-20210215154311516.png",
-    "blog/2020-09-25-考研英语——翻译.md",
-    "Pasted image 20221228115958.png"
+    "2022-12-14-leecode/LeetCode.assets/image-20210215154311516.png.md"
   ]
 }

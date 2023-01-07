@@ -9,7 +9,7 @@
   align-items: center;
   position: relative;
   /* overflow: hidden; */
-  background: url('/img/walking_outside.svg') rgba(0,0,0,0.6) no-repeat center center;
+  background: url('/img/walking_outside.svg') rgba(0,0,0,0.3) no-repeat center center;
   background-blend-mode: multiply;
   background-size: cover;
 }

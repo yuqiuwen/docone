@@ -16,5 +16,6 @@
   "newFileLocation": "folder",
   "newFileFolderPath": "blog",
   "newLinkFormat": "relative",
-  "useMarkdownLinks": true
+  "useMarkdownLinks": true,
+  "strictLineBreaks": true
 }

@@ -6,7 +6,7 @@ keywords: [
     "software development",
 ]
 tags: [ "Python", "Django", 'DataBase', 'Network' ]
-date: 2022/12/14 12:00
+date: 2023-01-07 17:50
 ---
 
 ## Anconda环境
@@ -688,8 +688,9 @@ print(execute_time)
 > 单线程完成多任务，多个任务按照一定顺序交替执行
 
 
+await后面接可等待对象：croutine
 
-`python3.7之前的版本`
+
 
 ```python
 import asyncio
@@ -741,8 +742,54 @@ asyncio.run(main())
 
 ### 常用库
 
-#### pathlib2
+#### 内置库
 
+##### zipfile
+```python
+import os  
+from zipfile import ZipFile  
+  
+  
+def make_zip(target, output):  
+    """  
+    压缩文件夹或单个文件  
+    :param target: 要打包的文件路径. /xx/xx/file  
+    :param output: 输出路径. /xx/xx/file.zip  
+    :return:  
+    """    if not os.path.exists(target):  
+        raise FileNotFoundError  
+    with ZipFile(output, 'w') as zf:  
+        if os.path.isfile(target):  # 打包单个文件  
+            zf.write(target, os.path.relpath(target, start=os.path.dirname(target)))  
+        else:                       # 打包目录  
+            for parent, dirnames, filenames in os.walk(target):  
+                for filename in filenames:  
+                    filepath = os.path.join(parent, filename)  
+                    relpath = os.path.relpath(filepath, start=os.path.dirname(target))  
+                    zf.write(filepath, relpath)  
+  
+  
+def unzip(target, output):  
+    """  
+    解压文件夹  
+    :param target: 压缩文件路径  
+    :param output: 输出路径  
+    :return:  
+    """    if not os.path.exists(output):  
+        os.makedirs(output)  
+    with ZipFile(target, mode='r') as zf:  
+        zf.extractall(output)  
+  
+  
+# make_zip("E:/uploads/files", "E:/uploads/files.zip")  
+unzip("E:/uploads/files.zip", "E:/uploads/output")
+```
+
+
+
+#### 三方库
+
+ ###### pathlib2
 ```python
 path1 = r"E:\Projects\PythonProjects\flask\test.py"
 path2 = Path(r"E:\Projects\PythonProjects\flask\test.py")
@@ -848,6 +895,8 @@ files = [path for path in Path("返回生成器, 只遍历一级目录和文件"
 files = [path for path in Path("返回生成器, 只遍历一级目录和文件，可正则过滤").glob('*.txt')]
 files = [path for path in Path("返回生成器, 深度遍历，[!.]会排除以点开头的文件").rglob('[!.]*')]
 ```
+
+
 
 
 

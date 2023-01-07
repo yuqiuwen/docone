@@ -117,12 +117,9 @@ function BlogListPage(props) {
                   placeholder="🔍 Search..." />
               </div>
               <div className="bloghome__posts">
-                <div className="bloghome__posts-list">
-                  
+                <div>
                   {itemsFiltered.map(({ content: BlogPostContent }, index) => {
                 
-
-
                     const { metadata: blogMetaData, frontMatter, } = BlogPostContent;
 
                     const { date, tags } = blogMetaData;
@@ -154,7 +151,7 @@ function BlogListPage(props) {
                             {blogMetaData.description}
                           </div>
 
-                          {tags.length >0 && <TagsListInline tags={tags} />}
+                          {tags.length >0 && <div style={{fontSize:'0.5rem'}}><TagsListInline tags={tags}/></div>}
 
                         </div>
                         
