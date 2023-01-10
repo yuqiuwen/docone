@@ -1299,7 +1299,7 @@ UPDATE 表名 SET 列名1=值1,列名2=值2 WHERE
 
 
 
-```mysql
+```sql
 #DISTINCT返回唯一不同的值
 SELECT DISTINCT 列名称 FROM 表名称
 

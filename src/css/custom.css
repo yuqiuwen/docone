@@ -40,6 +40,9 @@
   --ifm-code-background: #f8f8f8;
   --ifm-code-border-radius: var(--ifm-global-radius);
   --ifm-alert-color: #000000;
+
+  /* 搜索栏 */
+  --search-local-modal-width: 560px;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

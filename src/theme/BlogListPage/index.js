@@ -32,16 +32,15 @@ function BlogListPage(props) {
   const title = isBlogOnlyMode ? siteTitle : "Blog";
   const description = "blogs";
 
-  // Get all post views
-  // const views = useViews(items);
-
   const queryObj = props.location ? qs.parse(props.location.search, { ignoreQueryPrefix: true }) : {};
+
+  
 
   let itemsFiltered = items.slice(0);
   itemsFiltered.sort((a, b) => (b.content.metadata.featured === true && 1) || -1);
   const [onlyFeatured, setOnlyFeatured] = useState(queryObj['featured'] == 'true');
   const [searchTerm, setSearchTerm] = useState(null);
-  const [searchLimit, setSearchLimit] = useState(20);
+  const [searchLimit, setSearchLimit] = useState(10);
 
   let filteredCap = itemsFiltered.length;
   let increaseSearchLimit = function () {
@@ -108,8 +107,11 @@ function BlogListPage(props) {
       <div className={styles.cookbookItemsContainer}>
         <div className="container container--narrow container--bleed margin-vert--lg padding-vert--sm">
           <div className="row">
+            
             <div className="col col--12">
+              
               <div className={styles.search}>
+           
                 <input
                   className={classnames("shadow--lw", styles.cookbookSearch)}
                   type="text"
@@ -151,7 +153,7 @@ function BlogListPage(props) {
                             {blogMetaData.description}
                           </div>
 
-                          {tags.length >0 && <div style={{fontSize:'0.5rem'}}><TagsListInline tags={tags}/></div>}
+                          {tags.length >0 && <div style={{fontSize:'0.8rem'}}><TagsListInline tags={tags}/></div>}
 
                         </div>
                         
