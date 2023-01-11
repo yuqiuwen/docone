@@ -106,7 +106,7 @@ const config = {
       //   isCloseable: true,
       // }, 
       navbar: {
-        hideOnScroll: true,
+        hideOnScroll: true, // 粘性导航条
         title: 'DOCONE',
         logo: {
           alt: 'DocOne Logo',

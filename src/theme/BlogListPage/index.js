@@ -110,14 +110,14 @@ function BlogListPage(props) {
             
             <div className="col col--12">
               
-              <div className={styles.search}>
+              {/* <div className={styles.search}>
            
                 <input
                   className={classnames("shadow--lw", styles.cookbookSearch)}
                   type="text"
                   onChange={(event) => setSearchTerm(event.currentTarget.value)}
                   placeholder="🔍 Search..." />
-              </div>
+              </div> */}
               <div className="bloghome__posts">
                 <div>
                   {itemsFiltered.map(({ content: BlogPostContent }, index) => {
