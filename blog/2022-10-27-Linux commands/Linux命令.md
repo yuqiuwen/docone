@@ -307,6 +307,10 @@ sftp> ls
 sftp> pwd //查询当前工作目录
 ```
 
+####  rsync传输文件
+```bash
+rsync -av -e ssh --exclude 'exclude_path绝对路径' 本地路径 远程路径
+```
 
 
 #### test 判断文件是否存在

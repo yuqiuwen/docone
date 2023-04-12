@@ -114,16 +114,18 @@ const config = {
         },
         items: [
           { to: '/Blog', label: 'Blog', position: 'left' },
-          // { to: '/cookbooks', label: 'CookBooks', position: 'left' },
+          
           { 
-            to: 'cookbooks111',
+            to: 'cookbooks',
             type: 'doc', 
             docId: 'intro',
             position: 'left',
             label: 'CookBooks',
           },
+          { to: 'robot', label: 'ChatGPT', position: 'left' },
           { type: 'search',position: 'right',},
           { href: 'https://github.com/yuqiuwen', label: 'GitHub', position: 'right',},
+          { to: 'login', label: 'Login', position: 'right' },
         ],
       },
       // algolia: {
