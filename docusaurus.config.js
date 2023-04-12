@@ -20,6 +20,7 @@ const config = {
   projectName: 'docone', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false, // add a '/' to urls
+  onBrokenLinks: 'warn',
 
   markdown: {
     mermaid: true,
