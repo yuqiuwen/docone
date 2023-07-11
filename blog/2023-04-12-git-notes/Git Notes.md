@@ -6,8 +6,23 @@ tags: [Git]
 date: 2023-04-12 11:46
 ---
 
+<hr/>
 
-![](https://cdn.nlark.com/yuque/0/2023/png/34802521/1676526963937-985a1e25-147d-4238-bf5a-8c0266b52370.png#averageHue=%23fdfdfd&clientId=ua9e4881a-da29-4&from=paste&height=438&id=ubf9bed0c&originHeight=1178&originWidth=1320&originalType=url&ratio=1.100000023841858&rotation=0&showTitle=false&status=done&style=none&taskId=uf78ad4d5-9e92-4fae-ba7b-aae3581f98d&title=&width=491.15338134765625)
+## workflow
+
+<img 
+  src={require('./.asserts/Snipaste_2023-07-11_15-16-05.png').default} 
+  alt="git-flow"  
+  width="50%"
+ />
+<p/>
+
+ <img 
+  src={require('./.asserts/git-work-flow.png').default} 
+  alt="git-flow"  
+  width="50%"
+ />
+
 功能开发/修复完成后合并到develop，测试通过后基于master创建发布分支release，release合并开发/修复分支后，部署上线， 验收通过并封版后合到master，看需要来打tag
 
 - 开发/缺陷分支只能合并稳定分支例如可以合并master分支，不可merge develop分支，作用是防止环境 污染 
@@ -155,7 +170,16 @@ chore: 跟仓库主要业务⽆关的构建/⼯程依赖/⼯具等功能改动�
 ```
 
 
-![](https://cdn.nlark.com/yuque/0/2023/png/34802521/1676344830247-fba2e1c6-00db-497a-a406-5aa44e6ea1ad.png#averageHue=%23faf3f3&clientId=u9786eaac-ae45-4&from=paste&height=297&id=u1fb16caf&originHeight=593&originWidth=840&originalType=url&ratio=1.100000023841858&rotation=0&showTitle=false&status=done&style=none&taskId=u2ffc42b6-6a77-4fec-971d-c8b5b0870ff&title=&width=420)
+| 提交类型 | 含义                     |
+| -------- | ------------------------ |
+| feat     | 新功能（feature）        |
+| fix      | 修复 bug                 |
+| perf     | 性能优化                 |
+| refactor | 重构代码                 |
+| docs     | 文档相关                 |
+| style    | 样式相关                 |
+| test     | 测试相关                 |
+| chore    | 构建过程或辅助工具的变动 |
 
 
 ## 生成密钥对
