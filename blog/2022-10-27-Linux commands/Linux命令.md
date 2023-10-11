@@ -3,18 +3,23 @@ title: Linux Commands
 authors: Qiuwen
 description: ''
 keywords: [
-    "笔记",
+    "notion",
     "linux",
     
 ]
-tags: [ "Linux", "笔记",]
+tags: [ "Linux", "notion",]
 date: 2022-10-27 12:47
 ---
 
 
 > https://man.niaoge.com/
 
-## 常用命令
+
+## Linux File System
+![linux-file-system](Linux命令.assets/linux-file-system.jpeg)
+
+
+## Commonds
 
 #### df 查看磁盘占用情况
 
