@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[6906],{74980:(e,n,c)=>{c.r(n),c.d(n,{default:()=>r});c(67294);var l=c(34991),o=c(85893);function r(){return(0,o.jsx)(l.Z,{title:"BookMark",description:"Hello React Page",children:(0,o.jsx)("div",{children:"null"})})}}}]);

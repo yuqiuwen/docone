@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[7196],{65584:e=>{e.exports=JSON.parse('{"label":"MySQL","permalink":"/docone/blog/tags/my-sql","allTagsPath":"/docone/blog/tags","count":1}')}}]);

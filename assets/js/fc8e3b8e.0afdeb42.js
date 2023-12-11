@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[2480],{67194:e=>{e.exports=JSON.parse('{"label":"\u52a8\u6001\u89c4\u5212","permalink":"/docone/blog/tags/\u52a8\u6001\u89c4\u5212","allTagsPath":"/docone/blog/tags","count":1,"unlisted":false}')}}]);

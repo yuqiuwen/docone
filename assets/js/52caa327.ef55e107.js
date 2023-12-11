@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[1467],{84798:e=>{e.exports=JSON.parse('{"label":"Fabric","permalink":"/docone/blog/tags/fabric","allTagsPath":"/docone/blog/tags","count":1}')}}]);

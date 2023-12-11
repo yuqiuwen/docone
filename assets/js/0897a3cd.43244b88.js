@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[4060],{90947:e=>{e.exports=JSON.parse('{"label":"Mind","permalink":"/docone/blog/tags/mind","allTagsPath":"/docone/blog/tags","count":1}')}}]);
