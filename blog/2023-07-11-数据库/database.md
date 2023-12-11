@@ -1,5 +1,5 @@
 ---
-title: 数据库
+title: Database
 authors: Qiuwen
 description: ''
 tags: [数据库, MySQL]

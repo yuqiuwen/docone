@@ -26,3 +26,16 @@
             line-clamp: 3; 
     -webkit-box-orient: vertical;
   }
+
+.custom-input {
+    padding: 10px;
+    margin: 10px 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    /* background-color: #f2f2f2; */
+}
+
+.form-style {
+    margin: 20px;
+}

@@ -1,5 +1,5 @@
 ---
-title: python asyncio
+title: Python Asyncio
 authors: Qiuwen
 description: 使用协程请求网址并解析github DNS IP, 替换hosts文件内容。最后打包成可执行文件
 tags: ['协程','并发编程','爬虫','脚本开发']

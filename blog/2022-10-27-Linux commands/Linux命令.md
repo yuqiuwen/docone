@@ -60,6 +60,10 @@ free -m 以MB为单位显示内存使用情况
 -t	分隔符，默认 tab
 -k	以某个分隔区间排序
 cat /etc/passwd | sort -t ':' -k 3 -n
+
+
+example:
+sort test.txt | uniq -d        # 统计重复行
 ```
 
 #### chmod 修改权限
@@ -85,6 +89,12 @@ uname -a	显示系统详细信息
 ```shell
 tar -zxvf	解压文件
 tar -cvf	打包文件
+```
+
+
+#### 查看cpu配置
+```bash
+cat /proc/cpuinfo
 ```
 
 #### grep

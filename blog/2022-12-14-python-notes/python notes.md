@@ -1,5 +1,5 @@
 ---
-title: Back-End Notes
+title: BackEnd Notes
 authors: Qiuwen
 description: The Knowledge of back-end
 keywords: [
@@ -788,6 +788,7 @@ unzip("E:/uploads/files.zip", "E:/uploads/output")
 
 
 #### 三方库
+Tenacity 错误重试 https://tenacity.readthedocs.io/en/latest/
 
  ###### pathlib2
 ```python
@@ -1376,7 +1377,7 @@ from Scores
 
 **为什么降低增删改速度？**
 
-B+树是一棵平衡树（左右子树高度差的绝对值<=1），增删改会破坏原有树的结构，要重新调整平衡
+B+树是一棵平衡树（左右子树高度差的绝对值 <= 1），增删改会破坏原有树的结构，要重新调整平衡
 
 
 

@@ -2,6 +2,10 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const path = require('path');
+const {themes} = require('prism-react-renderer');
+const lightTheme = themes.github;
+const darkTheme = themes.dracula;
+
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -24,6 +28,7 @@ const config = {
 
   markdown: {
     mermaid: true,
+    format: 'md',
   },
   themes: [
     '@docusaurus/theme-mermaid',
@@ -49,7 +54,7 @@ const config = {
   plugins: [
     // 'docusaurus-plugin-sass',
     '@docusaurus/theme-live-codeblock',
-    './src/plugins/custom-tags-list-plugin.js',
+    './src/plugins/custom-tags-list-plugin.js'
   ],
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -123,7 +128,7 @@ const config = {
             position: 'left',
             label: 'CookBooks',
           },
-          { to: 'robot', label: 'ChatGPT', position: 'left' },
+          { to: 'bookmark', label: 'BookMark', position: 'left' },
           { type: 'search',position: 'right',},
           { href: 'https://github.com/yuqiuwen', label: 'GitHub', position: 'right',},
           { to: 'login', label: 'Login', position: 'right' },
@@ -136,9 +141,9 @@ const config = {
       //   contextualSearch: true
       // },
       prism: {
-        theme: require('prism-react-renderer/themes/github'),
-        darkTheme: require('prism-react-renderer/themes/okaidia'),
-        defaultLanguage: 'javascript',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        defaultLanguage: 'typescript',
         colorMode: {
           respectPrefersColorScheme: true
         },
