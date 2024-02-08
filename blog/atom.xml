@@ -2,11 +2,241 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id> https://yuqiuwen.github.io/docone/blog</id>
     <title>DOCONE Blog</title>
-    <updated>2023-08-08T11:46:00.000Z</updated>
+    <updated>2024-02-01T15:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href=" https://yuqiuwen.github.io/docone/blog"/>
     <subtitle>DOCONE Blog</subtitle>
     <icon> https://yuqiuwen.github.io/docone/img/book-open.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Celery]]></title>
+        <id> https://yuqiuwen.github.io/docone/blog/2024/02/01/celery</id>
+        <link href=" https://yuqiuwen.github.io/docone/blog/2024/02/01/celery"/>
+        <updated>2024-02-01T15:00:00.000Z</updated>
+        <summary type="html"><![CDATA[问题1：job无法被worker正确接收]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="问题1job无法被worker正确接收">问题1：job无法被worker正确接收<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E9%97%AE%E9%A2%981job%E6%97%A0%E6%B3%95%E8%A2%ABworker%E6%AD%A3%E7%A1%AE%E6%8E%A5%E6%94%B6" class="hash-link" aria-label="Direct link to 问题1：job无法被worker正确接收" title="Direct link to 问题1：job无法被worker正确接收">​</a></h2>
+<p>线上同一台机器部署了两套服务，分别启动了Celery应用，选取Rabbitmq作为Broker，其中两套服务共用同一个Broker。结果导致：服务B的任务被服务A的Celery received，于是可能会报错：<br>
+<em>Received unregistered task of type 'apps.tasks.scheduled_job.calc_post_score'</em></p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="消息队列">消息队列<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97" class="hash-link" aria-label="Direct link to 消息队列" title="Direct link to 消息队列">​</a></h3>
+<p>首先了解一下<code>AMQP</code>的几个核心定义：</p>
+<blockquote>
+<p>AMQP，即Advanced Message Queuing Protocol（高级消息队列协议）<br>
+参考：<a href="https://docs.celeryq.dev/en/latest/userguide/routing.html#exchanges-queues-and-routing-keys" target="_blank" rel="noopener noreferrer">celery文档</a></p>
+</blockquote>
+<ul>
+<li>
+<p>message 消息，由headers和body组成，例如celery中消息格式：</p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   </span><span class="token string" style="color:#e3116c">'task'</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'myapp.tasks.add'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   </span><span class="token string" style="color:#e3116c">'id'</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'54086c5e-6193-4575-8308-dbab76798756'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   </span><span class="token string" style="color:#e3116c">'args'</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token number" style="color:#36acaa">4</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">4</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   </span><span class="token string" style="color:#e3116c">'kwargs'</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   </span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>producer 生产者，发送信息的客户端通常称为发布者或生产者</p>
+</li>
+<li>
+<p>consumer 消费者，接收消息的实体</p>
+</li>
+<li>
+<p>broker 消息中间件，负责将信息从生产者路由到消费者，可以是redis或rabbitmq（官方推荐）</p>
+</li>
+<li>
+<p>channel 信道，建立在connection连接之上</p>
+</li>
+<li>
+<p>exchanges 交换机，负责接收生产者发送的消息，并将其路由到相应的队列。支持3种类型：<code>Direct</code>、<code>Topic</code>、<code>Fanout</code>，<a href="https://docs.celeryq.dev/projects/kombu/en/main/introduction.html#transport-comparison" target="_blank" rel="noopener noreferrer">不是所有传输都支持这3种</a></p>
+</li>
+<li>
+<p>queues 队列，存储消息的地方，消费者会从队列中获取消息</p>
+</li>
+<li>
+<p>routing keys 路由键，exchange会根据路由键将消息路由到对应的队列</p>
+</li>
+</ul>
+<p><strong>任务发送接收流程</strong></p>
+<p><img loading="lazy" alt="yuque_diagram.jpg" src="https://yuqiuwen.github.io/docone/assets/images/yuque_diagram-7c15464adfcb3e843b1e765f20a6a669.jpg" width="1677" height="1154" class="img_ev3q"></p>
+<p><strong>AMQP通信流程</strong></p>
+<!-- -->
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解决方案">解决方案<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88" class="hash-link" aria-label="Direct link to 解决方案" title="Direct link to 解决方案">​</a></h3>
+<p>问题1原因：<br>
+exchange无法将job路由到对应的队列，或者说因为没有指定队列，导致队列中的job共享而无法找到。<br>
+解决方法就是初始化时指定队列名。<br>
+以下展示了Flask中如何配置队列和交换机</p>
+<p>通过工厂函数初始化celery app，配置了queue之后，任务函数也必须指定一个队列名，或者设置一个<code>task_default_queue</code>默认队列，就不用在每个任务函数装饰器中使用 <code>queue</code> 参数指定队列了</p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic"># 配置queues</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">conf</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">task_queues </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Queue</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        Exchange</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        routing_key</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">conf</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">task_default_queue </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">set_default</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">autodiscover_tasks</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">"apps.tasks"</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="使用celery的注意点">使用celery的注意点<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E4%BD%BF%E7%94%A8celery%E7%9A%84%E6%B3%A8%E6%84%8F%E7%82%B9" class="hash-link" aria-label="Direct link to 使用celery的注意点" title="Direct link to 使用celery的注意点">​</a></h3>
+<p><code>task_acks_late</code><br>
+设置为True表示任务在执行完成之后才确认，如果Worker进程突然退出或被kill掉也会立即确认；如果为False表示执行之前就确认（默认值）</p>
+<p><code>task_reject_on_worker_lost</code><br>
+设为False, worker进程崩掉之后将重新加入worker，默认值False，可能会造成循环执行</p>
+<p><code>task_always_eager</code> 设为True可用于本地同步调试，而不经过broker</p>
+<p><strong>周期任务无法被正确识别？</strong><br>
+使用<code>include</code>指定任务模块（和import语义相同）<br>
+使用<code>beat_schedule</code>参数指定周期任务字典配置，比如：</p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token triple-quoted-string string" style="color:#e3116c">"""手动导入任务，否则可能无法识别"""</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">INCLUDES </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"apps.tasks.scheduled_job"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">BEAT_SCHEDULES </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># 更新文章热度值</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">"calc_post_score"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"task"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"apps.tasks.scheduled_job.calc_post_score"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"schedule"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> crontab</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"0"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"1,7,13,19"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"args"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># 更新评论热度值</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token string" style="color:#e3116c">"calc_comment_score"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"task"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"apps.tasks.scheduled_job.calc_comment_score"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"schedule"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> crontab</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"30"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"1,7,13,19"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string" style="color:#e3116c">"args"</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>celery如何访问Flask App上下文</strong></p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">def</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">init_app</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">app</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> Flask</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> config</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> Celery</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">class</span><span class="token plain"> </span><span class="token class-name">FlaskTask</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">Task</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token keyword" style="color:#00009f">def</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">__call__</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">self</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">*</span><span class="token plain">args</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token builtin">object</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">**</span><span class="token plain">kwargs</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token builtin">object</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token builtin">object</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token keyword" style="color:#00009f">with</span><span class="token plain"> app</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">app_context</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token keyword" style="color:#00009f">return</span><span class="token plain"> self</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">run</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">*</span><span class="token plain">args</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">**</span><span class="token plain">kwargs</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> Celery</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">app</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">name</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> task_cls</span><span class="token operator" style="color:#393A34">=</span><span class="token plain">FlaskTask</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">task_cls </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> FlaskTask</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">config_from_object</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">config</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic"># 配置queues</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">conf</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">task_queues </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        Queue</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            Exchange</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            routing_key</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">conf</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">task_default_queue </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"game_community_default"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">set_default</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    celery</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">autodiscover_tasks</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">"apps.tasks"</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    app</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">extensions</span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">"celery"</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> celery</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">return</span><span class="token plain"> celery</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>另外，使用 @celery_app.task 来装饰任务函数需要访问 celery_app 对象，而使用工厂模式则无法访问 celery_app对象，用@shared_task来替代。</p>
+<p>调用 celery_app.set_default() 使得@shared_task 装饰器可以访问任何current app，这与 Flask 的蓝图和应用程序上下文概念类似。</p>
+<p><strong>Task states</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>状态</th><th>说明</th></tr></thead><tbody><tr><td>PENDING</td><td>任务已被添加到任务队列中，等待执行</td></tr><tr><td>STARTED</td><td>任务已开始执行</td></tr><tr><td>RETRY</td><td>任务已失败并且正在尝试重新执行</td></tr><tr><td>FAILURE</td><td>任务执行失败</td></tr><tr><td>SUCCESS</td><td>任务执行成功</td></tr><tr><td>REVOKED</td><td>任务已被撤销</td></tr></tbody></table>
+<p>自定义状态</p>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token decorator annotation punctuation" style="color:#393A34">@app</span><span class="token decorator annotation punctuation" style="color:#393A34">.</span><span class="token decorator annotation punctuation" style="color:#393A34">task</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">bind</span><span class="token operator" style="color:#393A34">=</span><span class="token boolean" style="color:#36acaa">True</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">def</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">upload_files</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">self</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> filenames</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">for</span><span class="token plain"> i</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token builtin">file</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">in</span><span class="token plain"> </span><span class="token builtin">enumerate</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">filenames</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">not</span><span class="token plain"> self</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">request</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">called_directly</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            self</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">update_state</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">state</span><span class="token operator" style="color:#393A34">=</span><span class="token string" style="color:#e3116c">'PROGRESS'</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                meta</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token string" style="color:#e3116c">'current'</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> i</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">'total'</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token builtin">len</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">filenames</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="问题2apscheduler周期任务重复执行">问题2：Apscheduler周期任务重复执行<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E9%97%AE%E9%A2%982apscheduler%E5%91%A8%E6%9C%9F%E4%BB%BB%E5%8A%A1%E9%87%8D%E5%A4%8D%E6%89%A7%E8%A1%8C" class="hash-link" aria-label="Direct link to 问题2：Apscheduler周期任务重复执行" title="Direct link to 问题2：Apscheduler周期任务重复执行">​</a></h2>
+<p>多进程环境下，比如Gunicorn多个worker部署，Apscheduler周期任务会重复执行多次</p>
+<p>这是Apscheduler3的一个issue，不知道后续版本会不会优化</p>
+<h3 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="解决方案-1">解决方案<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1" class="hash-link" aria-label="Direct link to 解决方案" title="Direct link to 解决方案">​</a></h3>
+<ul>
+<li>尝试过设置gunicorn worker数=1，无法解决</li>
+<li>redis分布式锁，执行之前尝试获取锁，成功才执行，注意最后无论执行是否成功都要释放锁</li>
+</ul>
+<h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="如何设计一个scheduled-job">如何设计一个Scheduled Job<a href="https://yuqiuwen.github.io/docone/blog/2024/02/01/celery#%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AAscheduled-job" class="hash-link" aria-label="Direct link to 如何设计一个Scheduled Job" title="Direct link to 如何设计一个Scheduled Job">​</a></h2>
+<p><strong>cron表达式</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>属性</th><th>英文名</th><th>值</th></tr></thead><tbody><tr><td>分</td><td>minute</td><td>0-59</td></tr><tr><td>时</td><td>hour</td><td>0-23</td></tr><tr><td>日</td><td>day_of_month</td><td>1-31</td></tr><tr><td>月</td><td>month_of_year</td><td>1-12</td></tr><tr><td>周</td><td>day_of_week</td><td>0-6</td></tr><tr><td>开始时间（可选）</td><td>start_time</td><td></td></tr><tr><td>截止时间（可选）</td><td>end_time</td><td></td></tr></tbody></table>
+<p><strong>周期任务表 periodic_task</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>column</th><th>type</th><th>description</th></tr></thead><tbody><tr><td>name</td><td>str</td><td>任务名</td></tr><tr><td>description</td><td>str</td><td>备注</td></tr><tr><td>args</td><td>json / jsonb</td><td>任务函数参数</td></tr><tr><td>last_run_time</td><td>datetime</td><td>最后一次运行时间</td></tr><tr><td>trigger</td><td>str</td><td>contab触发参数</td></tr><tr><td>status</td><td>int</td><td>执行状态</td></tr><tr><td>enabled</td><td>int</td><td>任务启用 / 关闭</td></tr><tr><td>job_id</td><td>str</td><td>任务唯一id</td></tr><tr><td>result</td><td>str / json</td><td>执行结果</td></tr><tr><td>log_path</td><td>str</td><td>日志路径</td></tr></tbody></table>]]></content>
+        <author>
+            <name>Qiuwen</name>
+            <uri>https://github.com/yuqiuwen</uri>
+        </author>
+        <category label="Celery" term="Celery"/>
+        <category label="AMQP" term="AMQP"/>
+        <category label="RabbitMQ" term="RabbitMQ"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[RBAC]]></title>
         <id> https://yuqiuwen.github.io/docone/blog/2020/08/08/RBAC</id>
