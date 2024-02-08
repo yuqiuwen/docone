@@ -10,5 +10,4 @@ sequenceDiagram
     Server ->> Client: custom token
     Client ->> Client: storage token
     Client ->> Server: send request with token
-
 ```

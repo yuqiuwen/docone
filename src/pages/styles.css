@@ -39,3 +39,9 @@
 .form-style {
     margin: 20px;
 }
+
+.bookmark-container {
+    padding: 50px;
+    display: 'flex';
+    gap: '20px'
+}
