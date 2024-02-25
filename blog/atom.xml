@@ -534,17 +534,9 @@ executemany &lt; execute_batch &lt; execute_values &lt; prepare+execute_batch</p
         <summary type="html"><![CDATA[Git常用命令及GitLab CI/CD介绍]]></summary>
         <content type="html"><![CDATA[<hr>
 <h2 class="anchor anchorWithHideOnScrollNavbar_WYt5" id="workflow">workflow<a href="https://yuqiuwen.github.io/docone/blog/2023/04/12/git-notes/Git%20Notes#workflow" class="hash-link" aria-label="Direct link to workflow" title="Direct link to workflow">​</a></h2>
-<p>&lt;img
-src={require('./.asserts/Snipaste_2023-07-11_15-16-05.png').default}
-alt="git-flow"<br>
-width="50%"
-/&gt;</p>
+<p><img loading="lazy" src="https://yuqiuwen.github.io/docone/assets/images/Snipaste_2023-07-11_15-16-05-35914b001dfdda270831d7bacb1320e9.png" width="798" height="723" class="img_ev3q"></p>
 <p>
-</p><p>&lt;img
-src={require('./.asserts/git-work-flow.png').default}
-alt="git-flow"<br>
-width="50%"
-/&gt;</p>
+</p><p><img loading="lazy" src="https://yuqiuwen.github.io/docone/assets/images/git-work-flow-de2b5290bd946c539852a99c5c873816.png" width="1999" height="1977" class="img_ev3q"></p>
 <p>功能开发/修复完成后合并到develop，测试通过后基于master创建发布分支release，release合并开发/修复分支后，部署上线， 验收通过并封版后合到master，看需要来打tag</p>
 <ul>
 <li>开发/缺陷分支只能合并稳定分支例如可以合并master分支，不可merge develop分支，作用是防止环境 污染</li>
