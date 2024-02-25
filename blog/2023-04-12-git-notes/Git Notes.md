@@ -10,18 +10,12 @@ date: 2023-04-12 11:46
 
 ## workflow
 
-<img 
-  src={require('./.asserts/Snipaste_2023-07-11_15-16-05.png').default} 
-  alt="git-flow"  
-  width="50%"
- />
+
+ ![](./.asserts/Snipaste_2023-07-11_15-16-05.png)
 <p/>
 
- <img 
-  src={require('./.asserts/git-work-flow.png').default} 
-  alt="git-flow"  
-  width="50%"
- />
+![](./.asserts/git-work-flow.png)
+
 
 功能开发/修复完成后合并到develop，测试通过后基于master创建发布分支release，release合并开发/修复分支后，部署上线， 验收通过并封版后合到master，看需要来打tag
 

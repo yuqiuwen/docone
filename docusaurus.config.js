@@ -10,7 +10,7 @@ const darkTheme = themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DOCONE',
-  tagline: 'do what u wanna do and love who u wanna love',
+  tagline: 'heart is free',
   url: ' https://yuqiuwen.github.io',
   baseUrl: '/docone/',
   
