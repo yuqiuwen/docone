@@ -296,8 +296,6 @@ maxValue([[1,2,5],[3,2,1]])
 
 
 
-
-
 #### 滑动窗口
 
 > 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。返回滑动窗口中的最大值 。
@@ -340,6 +338,42 @@ def maxSlidingWindow(nums: List[int], k: int) -> List[int]:
 ```
 
 
+
+#### 数组和树形数据转换
+```python
+data = [
+    {'id': 1, 'pid': 0},
+    {'id': 2, 'pid': 1},
+    {'id': 7, 'pid': 2},
+    {'id': 8, 'pid': 6}
+]
+```
+
+
+- **扁平数组树形化**
+  ```python
+  def list2Tree(data, parent=None):
+    output = []
+    for node in data:
+        if node["pid"] != parent:
+            continue
+        children = list2Tree(data, node["id"])
+        node.update(children=children)
+        output.append(node)
+    return output
+  ```
+
+
+- **树形数据扁平化**
+  ```python
+  def flat_tree(data):
+    ret = []
+    for item in data:
+        ret.append({"id": item["id"], "pid": item["pid"]})
+        if item.get("children"):
+            ret.extend(flat_tree(item["children"]))
+    return ret
+  ```
 
 
 
