@@ -376,6 +376,36 @@ data = [
   ```
 
 
+#### 最大数字组合
+> 有几个任意位数的正整数，求能组成的最大数字
+
+思路：  
+若 a+b > b+a，则a应该在前，否则a在后
+
+```python
+from functools import cmp_to_key
+
+def max_number(nums):
+    # 自定义比较函数
+    def compare(x, y):
+        # 将两个字符串拼接起来进行比较
+        return int(y + x) - int(x + y)
+
+    # 将正整数转换为字符串
+    nums = [str(num) for num in nums]
+
+    # 使用自定义的比较函数对字符串进行排序
+    nums.sort(key=cmp_to_key(compare))
+
+    # 将排序后的字符串连接起来得到最大数
+    result = ''.join(nums)
+
+    return result
+
+```
+
+
+
 
 ## MySQL
 
