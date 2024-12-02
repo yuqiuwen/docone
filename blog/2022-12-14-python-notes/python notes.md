@@ -49,6 +49,58 @@ date: 2023-01-07 17:50
 
 yield from + 可迭代对象，实现对可迭代对象的再一次yield
 
+### 闭包
+> 外部函数中定义了一个内部函数，返回了内部函数的引用，内部函数引用了外部函数的变量
+
+自由变量：
+> 在当前作用域中引用了但未定义的变量，而是在外部作用域中定义的，如果要访问外部作用域中的非全局变量，需用关键字nonlocal定义
+
+示例：
+```python
+# 因访问了外部作用域中的非全局变量，会报错：UnboundLocalError: local variable 'a' referenced before assignment
+def outer():
+    a = 0
+    def inner(y):
+        a += y
+        return a
+    return inner
+
+
+# 使用nonlocal定义自由变量
+def outer():
+    a = 0
+    def inner(y):
+        nonlocal a
+        a += y
+        return a
+    return inner
+
+func = outer()
+func(1)
+func(2)
+>>> output: 3
+
+
+# 如果外部变量是可变对象，内部函数可以直接通过引用修改该对象的内容，这种行为并不需要额外的 global 或 nonlocal 关键字
+def outer():
+    a = []
+    def inner(y):
+        a.append(y)
+        return a
+    return inner
+
+func = outer()
+func(1)
+func(2)
+>>> output: [1, 2]
+```
+
+
+闭包的作用：  
+1. 封装和隐藏数据：通过闭包，内嵌函数可以访问外部函数的变量，而外部环境无法直接修改这些变量，从而实现了封装，保护数据不被外部直接访问。
+2. 延迟执行：闭包常用于回调函数或延迟执行的场景，确保函数在某个时刻可以访问到当时的变量状态。
+3. 维持状态：闭包允许我们在函数中“记住”状态，比如计数器、缓存等。
+
 
 
 ### 类与对象
