@@ -218,6 +218,8 @@ __bases__：类的所有父类构成元素
 >
 > [Python进阶灵魂拷问，元类是什么，它有什么用？ - ludongguoa - 博客园 (cnblogs.com)](https://www.cnblogs.com/ludongguoa/p/15350348.html)
 
+可以通过继承自type来定义一个元类，用于控制类的行为和属性，比如实例化时新增方法或属性
+
 元类实例化 ——>自定义class ——>自定义类实例化 ——>实例
 
 
