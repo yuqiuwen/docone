@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[5069],{3458:o=>{o.exports=JSON.parse('{"label":"notion","permalink":"/docone/blog/tags/notion","allTagsPath":"/docone/blog/tags","count":1,"unlisted":false}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[6899],{6869:e=>{e.exports=JSON.parse('{"permalink":"/docone/blog/tags/dev-ops","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

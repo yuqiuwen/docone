@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[4489],{98455:o=>{o.exports=JSON.parse('{"permalink":"/docone/blog/tags/django","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

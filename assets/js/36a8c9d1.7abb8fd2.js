@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[9306],{612:e=>{e.exports=JSON.parse('{"label":"RestFramework","permalink":"/docone/blog/tags/rest-framework","allTagsPath":"/docone/blog/tags","count":1,"unlisted":false}')}}]);

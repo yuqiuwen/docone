@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[6927],{5530:e=>{e.exports=JSON.parse('{"label":"Python","permalink":"/docone/blog/tags/python","allTagsPath":"/docone/blog/tags","count":2,"unlisted":false}')}}]);

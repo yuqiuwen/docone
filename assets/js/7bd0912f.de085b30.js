@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocone=self.webpackChunkdocone||[]).push([[7059],{69280:e=>{e.exports=JSON.parse('{"label":"AMQP","permalink":"/docone/blog/tags/amqp","allTagsPath":"/docone/blog/tags","count":1,"unlisted":false}')}}]);
