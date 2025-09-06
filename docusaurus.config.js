@@ -131,6 +131,7 @@ const config = {
           { to: 'bookmark', label: 'BookMark', position: 'left' },
           { type: 'search',position: 'right',},
           { href: 'https://github.com/yuqiuwen', label: 'GitHub', position: 'right',},
+          { href: 'https://juejin.cn/user/462209519206109', label: '稀土掘金', position: 'right',},
           { to: 'login', label: 'Login', position: 'right' },
         ],
       },
